@@ -12,9 +12,10 @@ import java.lang.reflect.Field
 class UwULogs : JavaPlugin() {
     private val LOCK = File(dataFolder, "uwu.lock")
 
-    override fun onLoad() {
-        // Enable plugin as soon as it is loaded so that it enables before all other plugins
-        Bukkit.getPluginManager().enablePlugin(this)
+    init {
+        runCatching {
+            Bukkit.getPluginManager().enablePlugin(this)
+        }.onFailure { it.printStackTrace() }
     }
 
     override fun onEnable() {
