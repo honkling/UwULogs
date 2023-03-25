@@ -1,0 +1,8 @@
+name: UwULogs
+version: '${project.version}'
+main: me.honkling.uwulogs.UwULogs
+api-version: 1.13
+prefix: UwULogs
+load: STARTUP
+authors: [ honkling ]
+description: A plugin that uwuifies all logged messages.
