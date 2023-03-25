@@ -43,6 +43,10 @@ fun uwuify(text: String) : String {
         7 -> "~ owo"
         8 -> "~ uwu"
         9 -> " ;3"
+        10 -> "~ *boops your nose*"
+        11 -> "~ *snuggles up to you*"
+        12 -> "~ *giggles*"
+        13 -> "~ *gives you a hug*"
         else -> "~"
     }
 
