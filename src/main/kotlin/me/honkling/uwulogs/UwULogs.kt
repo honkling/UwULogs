@@ -10,19 +10,20 @@ import java.io.File
 import java.lang.reflect.Field
 
 class UwULogs : JavaPlugin() {
-    private val LOCK = File(dataFolder, "uwu.lock")
+    private var locked = false
 
-    init {
-        runCatching {
-            Bukkit.getPluginManager().enablePlugin(this)
-        }.onFailure { it.printStackTrace() }
+    override fun onLoad() {
+        // Enable UwULogs as soon as possible.
+        // We cannot use an init {} block because we depend on Bukkit having loaded all the other plugins as well.
+        // If we use init {}, no plugins will be listed by the plugin manager, and we won't be able to replace plugin loggers.
+        Bukkit.getPluginManager().enablePlugin(this)
     }
 
     override fun onEnable() {
         dataFolder.mkdir()
 
-        if (LOCK.exists()) {
-            LOCK.delete()
+        if (locked) {
+            locked = false
             return
         }
 
@@ -31,11 +32,11 @@ class UwULogs : JavaPlugin() {
         setPluginLoggers()
 
         logger.info("UwULogs is done.")
-        LOCK.createNewFile()
-    }
+        locked = true
 
-    override fun onDisable() {
-        LOCK.delete()
+        Bukkit.getScheduler().runTask(this) {
+            throw Exception("hello")
+        }
     }
 
     fun setPluginLoggers() {
