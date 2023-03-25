@@ -33,10 +33,6 @@ class UwULogs : JavaPlugin() {
 
         logger.info("UwULogs is done.")
         locked = true
-
-        Bukkit.getScheduler().runTask(this) {
-            throw Exception("hello")
-        }
     }
 
     fun setPluginLoggers() {
