@@ -33,13 +33,15 @@ private val uwuReplacements = mapOf(
 
 fun uwuify(text: String): String {
     var uwuText = text
+
     uwuReplacements.forEach { (key, value) ->
-        uwuText = uwuText.replace(key, value, ignoreCase = true)
+        uwuText = uwuText.replace(key, value, true)
     }
-    return uwuText + getRandomUwuSuffix()
+
+    return uwuText + getRandomUwUSuffix()
 }
 
-private fun getRandomUwuSuffix(): String {
+private fun getRandomUwUSuffix(): String {
     val uwuSuffixes = listOf(
         "~ uwu *nuzzles you*",
         "~ owo whats this",
@@ -54,7 +56,7 @@ private fun getRandomUwuSuffix(): String {
         "~ *snuggles with you*",
         "~ *giggles*",
         "~ *hugs you*",
-        "~"
     )
-    return uwuSuffixes.random()
+
+    return listOf(*uwuSuffixes.toTypedArray(), *Array(7) { "~" }).random()
 }
