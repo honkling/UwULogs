@@ -1,8 +1,6 @@
 package me.honkling.uwulogs.lib
 
 import org.bukkit.plugin.Plugin
-import java.io.OutputStream
-import java.io.PrintStream
 import java.util.logging.Level
 import java.util.logging.LogRecord
 import java.util.logging.Logger
@@ -29,12 +27,12 @@ class UwULogger(
             log.message = log.message.replace("{$i}", v.toString())
         }
 
-        println(log.message)
+        log(Level.INFO, log.message)
 
         if (log.thrown != null) {
             log.thrown.printStackTrace(object : PrintStream(System.err) {
                 override fun println(x: Any?) {
-                    println(uwuify(x.toString()))
+                    log(Level.SEVERE, uwuify(x.toString()))
                 }
             })
         }
