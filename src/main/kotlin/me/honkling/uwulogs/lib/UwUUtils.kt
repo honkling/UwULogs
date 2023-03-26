@@ -1,50 +1,60 @@
 package me.honkling.uwulogs.lib
 
-import kotlin.math.ceil
-
 // Thanks https://github.com/UwUAroze/UwUCore/blob/master/src/main/java/me/aroze/uwucore/util/UwUUtils.kt
-fun uwuify(text: String) : String {
-    return text
-        .replace("\\. ", "~ ", true)
-        .replace(", ", "~ ", true)
-        .replace("- ", "~ ", true)
-        .replace("\\? ", "~ ", true)
-        .replace("hurt", "hUWUrt", true)
-        .replace("kill", "hwuwrt", true)
-        .replace("you", "you<3", true)
-        .replace("r", "w", true)
-        .replace("l", "w", true)
-        .replace("uwu", "UWU", true)
-        .replace("owo", "OWO", true)
-        .replace(";-;", "(-_-)", true)
-        .replace("-_-", "(-_-)", true)
-        .replace(":o", "※(^o^)/※", true)
-        .replace(":0", "※(^o^)/※", true)
-        .replace(":\\)", "(｡◕‿‿◕｡)", true)
-        .replace(":>", "(｡◕‿‿◕｡)", true)
-        .replace(":\\(", "(︶︹︶)", true)
-        .replace(":<", "(︶︹︶)", true)
-        .replace(":3", "(・3・)", true)
-        .replace(":D", "(ﾉ◕ヮ◕)ﾉ*:・ﾟ✧", true)
-        .replace("\\._\\.", "(っ´ω`c)", true)
-        .replace("fuck", "fwick", true)
-        .replace("shit", "*poops*", true)
-        .replace("wtf", "whawt the fwick", true)
-        .replace("wth", "whawt the hecc", true) +
-            when ((ceil(Math.random() * 20)).toInt()) {
-                1 -> "~ uwu *nuzzles you*"
-                2 -> "~ owo whats this"
-                3 -> "~ *kisses you*"
-                4 -> "~ *blushes*"
-                5 -> "~ *hehe*"
-                6 -> "~ meow"
-                7 -> "~ owo"
-                8 -> "~ uwu"
-                9 -> " ;3"
-                10 -> "~ *boops your nose*"
-                11 -> "~ *snuggles with you*"
-                12 -> "~ *giggles*"
-                13 -> "~ *hugs you*"
-                else -> "~"
-            }
+
+private val uwuReplacements = mapOf(
+    "\\. " to "~ ",
+    ", " to "~ ",
+    "- " to "~ ",
+    "\\? " to "~ ",
+    "hurt" to "hUWUrt",
+    "kill" to "hwuwrt",
+    "you" to "you<3",
+    "r" to "w",
+    "l" to "w",
+    "uwu" to "UWU",
+    "owo" to "OWO",
+    ";-;" to "(-_-)",
+    "-_-" to "(-_-)",
+    ":o" to "※(^o^)/※",
+    ":0" to "※(^o^)/※",
+    ":\\)" to "(｡◕‿‿◕｡)",
+    ":>" to "(｡◕‿‿◕｡)",
+    ":\\(" to "(︶︹︶)",
+    ":<" to "(︶︹︶)",
+    ":3" to "(・3・)",
+    ":D" to "(ﾉ◕ヮ◕)ﾉ*:・ﾟ✧",
+    "\\._\\." to "(っ´ω`c)",
+    "fuck" to "fwick",
+    "shit" to "*poops*",
+    "wtf" to "whawt the fwick",
+    "wth" to "whawt the hecc"
+)
+
+fun uwuify(text: String): String {
+    var uwuText = text
+    uwuReplacements.forEach { (key, value) ->
+        uwuText = uwuText.replace(key, value, ignoreCase = true)
+    }
+    return uwuText + getRandomUwuSuffix()
+}
+
+private fun getRandomUwuSuffix(): String {
+    val uwuSuffixes = listOf(
+        "~ uwu *nuzzles you*",
+        "~ owo whats this",
+        "~ *kisses you*",
+        "~ *blushes*",
+        "~ *hehe*",
+        "~ meow",
+        "~ owo",
+        "~ uwu",
+        " ;3",
+        "~ *boops your nose*",
+        "~ *snuggles with you*",
+        "~ *giggles*",
+        "~ *hugs you*",
+        "~"
+    )
+    return uwuSuffixes.random()
 }
