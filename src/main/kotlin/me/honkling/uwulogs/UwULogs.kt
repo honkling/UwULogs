@@ -4,6 +4,7 @@ import me.honkling.uwulogs.lib.SLF4JUwULogger
 import me.honkling.uwulogs.lib.UwULogger
 import org.apache.logging.log4j.core.Logger
 import org.apache.logging.slf4j.Log4jLogger
+import org.bstats.bukkit.Metrics
 import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
 import java.io.File
@@ -21,6 +22,7 @@ class UwULogs : JavaPlugin() {
 
     override fun onEnable() {
         dataFolder.mkdir()
+        saveDefaultConfig()
 
         if (locked) {
             locked = false
@@ -30,6 +32,11 @@ class UwULogs : JavaPlugin() {
         setBukkitLogger()
         setMinecraftLogger()
         setPluginLoggers()
+
+        if (config.getBoolean("bstats")) {
+            Metrics(this, 18059)
+            logger.info("Enabled metrics.")
+        }
 
         logger.info("UwULogs is done.")
         locked = true

@@ -1,0 +1,2 @@
+# Enables bStats metrics.
+bstats: true

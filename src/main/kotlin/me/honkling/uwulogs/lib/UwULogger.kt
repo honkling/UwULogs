@@ -24,6 +24,11 @@ class UwULogger(
 
     override fun log(log: LogRecord) {
         log.message = uwuify(prefix + log.message)
+
+        log.parameters?.forEachIndexed { i, v ->
+            log.message = log.message.replace("{$i}", v.toString())
+        }
+
         println(log.message)
 
         if (log.thrown != null) {
